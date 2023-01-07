@@ -24,28 +24,58 @@ window.addEventListener("load", function () {
   }
 
   class Player {
-    constructor(gameWidth, gameHeight) {
+    constructor(gameWidth, gameHeight, groundHeight) {
       this.gameWidth = gameWidth;
       this.gameHeight = gameHeight;
-      this.width = 370;
-      this.height = 200;
+      this.width = 222;
+      this.height = 120;
       this.x = 10;
-      this.y = this.gameHeight - this.height;
+      this.y = groundHeight - this.height;
       this.image = document.getElementById("truckImage");
       this.speed = 0;
     }
     draw(context) {
-      context.fillStyle = "white";
-      context.fillRect(this.x, this.y, this.width, this.height);
       context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
+    // update(input) {
+    //   this.x += this.speed;
+    //   if (input.keys.indexOf("ArrowRight") > -1) {
+    //     this.speed = 1;
+    //   } else {
+    //     this.speed = 0;
+    //   }
+    // }
+  }
+
+  class Ground {
+    constructor(gameWidth, gameHeight) {
+      this.gameWidth = gameWidth;
+      this.gameHeight = gameHeight;
+      this.x = 0;
+      this.y = 600;
+      this.speed = 0;
+    }
+
+    draw(context) {
+      context.beginPath();
+      context.moveTo(this.x, this.y);
+      context.lineTo(this.gameWidth, this.y);
+      context.strokeStyle = "white";
+      context.setLineDash([5, 15]);
+      context.stroke();
+    }
+
+    // draw(context) {
+    //   context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    // }
     update(input) {
-      this.x += this.speed;
+      this.x -= this.speed;
       if (input.keys.indexOf("ArrowRight") > -1) {
         this.speed = 1;
       } else {
         this.speed = 0;
       }
+      console.log(this.x)
     }
   }
 
@@ -54,12 +84,14 @@ window.addEventListener("load", function () {
   function displayStatusText() {}
 
   const input = new InputHandler();
-  const player = new Player(canvas.width, canvas.height);
-
+  const ground = new Ground(canvas.width, canvas.height);
+  const player = new Player(canvas.width, canvas.height, ground.y);
+  console.log(player.y);
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     player.draw(ctx);
-    player.update(input);
+    ground.draw(ctx);
+    ground.update(input);
     requestAnimationFrame(animate);
   }
   animate();
