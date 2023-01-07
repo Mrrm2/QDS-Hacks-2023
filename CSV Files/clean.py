@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 
 def clean():
@@ -20,13 +21,21 @@ def clean():
     # Remove rows with empty values in FUEL_RATE column
     clean_data = all_data[all_data['FUEL_RATE'].notna()]
 
-    # Save clean data to master CSV
-    clean_data.to_csv('CleanData.csv', index=False)
+    # Remove rows with empty values in GPSELEVATION column
+    clean_data = clean_data[clean_data['GPSELEVATION'].notna()]
 
-    # Create a new CSV for each unique TRUCK_ID
-    for truck_id in clean_data['TRUCK_ID'].unique():
-        truck_data = clean_data[clean_data['TRUCK_ID'] == truck_id]
-        truck_data.to_csv('Truck' + str(truck_id) + '.csv', index=False)
+    # If we want to drop all rows with null (not sure if we have to)
+    # clean_data = clean_data.dropna()
+
+    # Create a new CSV for each unique route
+    os.mkdir('routes')
+    routes = clean_data.groupby(['SHOVEL_ID', 'DUMP_ID'])
+    for route, data in routes:
+        data.to_csv(f'routes\\ROUTE_{route[0]}_{route[1]}.csv', index=False)
+
+    os.mkdir('truck_type')
+    for truck_type, data in clean_data.groupby('TRUCK_TYPE_ID'):
+        data.to_csv(f'truck_type\\type_{truck_type}.csv', index=False)
 
 
 def main():
