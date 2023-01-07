@@ -37,6 +37,12 @@ def clean():
     for truck_type, data in clean_data.groupby('TRUCK_TYPE_ID'):
         data.to_csv(f'truck_type\\type_{truck_type}.csv', index=False)
 
+    test_set = clean_data.loc[clean_data['TRUCK_ID'] == 3 & clean_data['SHOVEL_ID'] == 0 & clean_data['DUMP_ID'] == 0]
+    test_set.to_csv('test_set.csv', index=False)
+
+    training_set = clean_data.loc[clean_data['TRUCK_ID'] != 3 & clean_data['SHOVEL_ID'] != 0 & clean_data['DUMP_ID'] != 0]
+    training_set.to_csv('training_set.csv', index=False)
+
 
 def main():
     clean()
