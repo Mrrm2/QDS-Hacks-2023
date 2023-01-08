@@ -1,8 +1,9 @@
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  canvas.width = 800;
-  canvas.height = 720;
+  const SCALE = 0.85
+  canvas.width = 800 * SCALE;
+  canvas.height = 650;
 
   const DECLINE = {
     terrain: "decline",
@@ -50,8 +51,8 @@ window.addEventListener("load", function () {
   let playerY = 100;
   let segment = Math.floor(distanceTravelled / 300);
   let currTerrain = path[segment];
-  let timer = 0
-  console.log("segment", segment);
+  let timer = 0;
+  // console.log("segment", segment);
 
   class InputHandler {
     constructor() {
@@ -74,24 +75,79 @@ window.addEventListener("load", function () {
 
   class Player {
     constructor(gameWidth, gameHeight) {
+      // this.starting_y = 100;
+      // // this.starting_x = 100;
+      // // this.x = distanceTravelled + this.starting_x;
+      // // this.segment = 0;
+      // // this.x_segment = 0;
+      // // this.y = this.starting_y;
+
+      // slope = path[this.segment].pathY / path[this.segment].pathX
+      // this.y += slope * this.x_segment
+
       this.gameWidth = gameWidth;
       this.gameHeight = gameHeight;
       this.width = 0;
       this.height = 0;
-      this.x = 100;
-      this.y = playerY;
+      this.x_relative = 100;
+      // this.y = playerY;
       this.image = document.getElementById("truckImage");
       this.speed = 0;
     }
     draw(context) {
-      if (segment === 1) {
-        playerY = (250 / 300) * (Math.abs(this.x)) + 100;
+      // this.x = distanceTravelled + this.starting_x;
+      // this.segment = Math.floor(this.x / 300);
+      // this.x_segment = this.x - 300 * this.segment;
+      
+      // if (path[this.segment].terrain === "flat") {
+      //   this.y = this.starting_y + 250
+      // } else {
+      //   this.y = this.starting_y;
+      // }      
+      // let slope = path[this.segment].pathY / path[this.segment].pathX;
+      // this.y += slope * 4
+      let slope = currTerrain.pathY / currTerrain.pathX;
+      let x = distanceTravelled + this.x_relative;
+      let intercept = segment * 100;
+      let offset = 100
+      console.log(`x value: ${x}      y value: ${playerY}`) 
+      switch (segment) {
+        case 0:
+          intercept = 0;
+          break;
+        case 1:
+          intercept = 300;
+          break;
+        case 2:
+          intercept = 300;
+          slope = 1;
+          x = 50;
+          break;
+        case 3:
+          intercept = 600;
+          break;
+        case 4:
+          intercept = 600;
+          slope = 1;
+          x = 100;
+          break;
+        case 5:
+          intercept = 600;
+          slope = 1;
+          x = 100;
+          break;
+        case 6:
+          intercept = 0;
+          offset = 1500;
+          break;
       }
-      console.log(this.y)
+      playerY = (slope) * Math.abs(x - intercept) + offset;
+
+      console.log(this.y);
       this.y = playerY;
       context.beginPath();
       context.setLineDash([]);
-      context.arc(this.x, this.y, 5, 0, 2 * Math.PI);
+      context.arc(this.x_relative, this.y, 5, 0, 2 * Math.PI);
       context.fillStyle = "red";
       context.fill();
     }
@@ -155,7 +211,7 @@ window.addEventListener("load", function () {
       this.x -= this.speed;
       distanceTravelled += this.speed;
       segment = Math.floor((distanceTravelled + 100) / 300);
-      console.log(segment);
+      // console.log(segment);
       currTerrain = path[segment];
       if (input.keys.indexOf("ArrowRight") > -1) {
         this.acceleration(true);
@@ -224,8 +280,8 @@ window.addEventListener("load", function () {
     player.draw(ctx);
     ground.draw(ctx);
     ground.update(input);
-    timer += 0.016666
-    console.log(timer)
+    timer += 0.016666;
+    // console.log(timer)
     // drive(input);
     requestAnimationFrame(animate);
   }

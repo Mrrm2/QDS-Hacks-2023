@@ -1,17 +1,53 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        #stopwatch {
+            font-size: 30px;
+        }
+    </style>
+
 </head>
+
 <body>
+    <div id="stopwatch">00:000</div>
+    <button id="start-button">Start</button>
+    <button id="stop-button">Stop</button>
+
     <div id="asdf"></div>
 </body>
 <script>
+    // stopwatch timer 
+    let intervalId;
+
+    function startStopwatch() {
+        let startTime = Date.now();
+        intervalId = setInterval(() => {
+            let elapsedTime = Date.now() - startTime;
+            let seconds = Math.floor(elapsedTime / 1000);
+            let milliseconds = elapsedTime % 1000;
+            milliseconds = milliseconds.toString().padStart(3, "0");
+            document.getElementById("stopwatch").innerHTML = `${seconds}:${milliseconds}`;
+        }, 1);
+    }
+
+    function stopStopwatch() {
+        clearInterval(intervalId);
+    }
+
+    document.getElementById("start-button").addEventListener("click", startStopwatch);
+    document.getElementById("stop-button").addEventListener("click", stopStopwatch);
+
+
     distanceTravelled = 1300
     gameLeg = Math.floor(distanceTravelled / 1500);
 
     document.getElementById("asdf").innerHTML = gameLeg
 </script>
+
 </html>

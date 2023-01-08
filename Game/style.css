@@ -5,7 +5,7 @@ body {
 #canvas1 {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 38%;
   transform: translate(-50%, -50%);
   border: 1px solid white;
 }
