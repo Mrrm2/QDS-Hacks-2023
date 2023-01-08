@@ -10,14 +10,34 @@
 	<body>
     <main>
       <section>
-        <div id="fp">fp</div>
+        <div id="fpBox">
+          <div id="fp">FP:</div>
+          <div id="fpInput"></div>
+        </div>
         <canvas id="canvas1"></canvas>
       </section>  
       
       <aside>
-        <div id="distanceBox">distance</div>
-        <div id="kmhBox">kmh</div>
-        <div id="ecoBox">eco</div>
+        <div id="distanceBox">
+          <div id="distance">distance left: <span id="distanceInput">500m</span></div>
+        </div>
+        <div id="kmhBox">
+          <div id="kmhInput">36</div>
+          <div id="kmh">km/h</div>
+        </div>
+        <div id="ecoBox">
+          <table>
+            <th>eco:</th>
+            <tr>
+              <td>empty:</td>
+              <td id="ecoEmptyInput">+20%</td>
+            </tr>
+            <tr>
+              <td>hauling:</td>
+              <td id="ecoHaulingInput">-5%</td>
+            </tr>
+          </table>
+        </div>
         <div id="nameBox">
           <div id="name">truk simulator 2023</div>
         </div>

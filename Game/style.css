@@ -1,5 +1,6 @@
 * {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: white;
 }
 
 body {
@@ -18,19 +19,35 @@ main {
   height: 720px;
 }
 
-
-
 section {
   float: left;
   width: 68%;
   height: 700px;
 }
 
-#fp {
+#fpBox {
+  position: relative;
   width: 100%;
   height: 50px;
+}
 
-  background-color: white;
+#fpInput {
+  position: absolute;
+  top: 50%; 
+  left: 55%;
+  transform: translate(-50%,-50%);
+  width: 90%;
+  height: 30px;
+  background-color: green;
+}
+
+#fp {
+  float: left;
+  padding-left: 10px;
+  line-height: 50px;
+
+  font-size: 28px;
+  font-weight: 600;
 }
 
 #canvas1 {
@@ -38,8 +55,6 @@ section {
   position: absolute;
   bottom: 20px;
 }
-
-
 
 aside {
   width: 30%;
@@ -50,8 +65,15 @@ aside {
   width: 100%;
   height: 50px;
   margin-bottom: 20px;
+  border: 1px solid white;
+}
 
-  background-color: red;
+#distance {
+  padding: 0px 10px 0px 10px;
+  line-height: 50px;
+
+  font-size: 28px;
+  font-weight: 600;
 }
 
 #kmhBox {
@@ -59,30 +81,50 @@ aside {
   height: 240px;
   margin-bottom: 20px;
 
-  background-color: green;
+  text-align: center;
+  border: 1px solid white;
+}
+
+#kmhInput{
+  font-size: 130px;
+  font-weight: 900;
+  line-height: 170px;
+}
+
+#kmh {
+  font-size: 28px;
+  font-weight: 600;
 }
 
 #ecoBox {
   width: 100%;
   height: 170px;
   margin-bottom: 20px;
+  border: 1px solid white;
+}
 
-  background-color: blue;
+table {
+  width: 80%;
+  text-align: center;
+
+  border: 1px solid white;
+}
+
+th {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 40px;
 }
 
 #nameBox {
   width: 100%;
-  /* height: 180px; */
   margin-bottom: 20px;
-
-  /* border: 1px solid white; */
 }
 
 #name {
   padding: 0px 10px 0px 10px;
   font-size: 48px;
   font-weight: 900;
-  color: white;
 }
 
 #truckImageFlat,
