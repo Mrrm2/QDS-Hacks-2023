@@ -266,3 +266,7 @@ input {
 .playerStartScreen {
   text-align: center;
 }
+
+#howToPlay {
+  color: red;
+}
