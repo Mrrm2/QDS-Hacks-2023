@@ -156,7 +156,11 @@ window.addEventListener("load", function () {
           70
         );
       } else if (currTerrain.terrain === "flat") {
-        this.image = document.getElementById("truckImageFlat");
+        if (segment >= 5){
+          this.image = document.getElementById("truckImageFlatHaul");
+        } else {
+          this.image = document.getElementById("truckImageFlat");
+        }
         context.drawImage(
           this.image,
           this.x_relative - 40,
