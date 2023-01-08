@@ -4,7 +4,7 @@
 }
 
 body {
-	background: black;
+  background: black;
 }
 
 main {
@@ -31,28 +31,50 @@ aside {
 }
 
 #fpBox {
+  display: flex;
+  border-style: solid;
   position: relative;
   width: 100%;
   height: 50px;
+  border-width: 1px;
+  border-color: white;
+  justify-content: space-evenly;
+}
+
+#fpBar {
+  background-color: green;
+  width: 75%;
+  height: 100%;
+}
+
+#fpBarLine {
+  position: absolute;
+  border-right: 3px solid black;
+  width: 60%;
+  height: 27.5px;
+  bottom: 11px;
 }
 
 #fpInput {
-  position: absolute;
-  top: 50%; 
-  left: 55%;
-  transform: translate(-50%,-50%);
-  width: 90%;
-  height: 30px;
+  align-self: center;
+  width: 88%;
+  height: 55%;
 
   /* CHANGE COLOUR IN JS */
-  background-color: green;
+  background-color: white;
+}
+
+#status {
+  position: absolute;
+  z-index: 1000;
+  top: 90px;
+  left: 30px;
+  font-size: 28px;
+  font-weight: 200px;
 }
 
 #fp {
-  float: left;
-  padding-left: 10px;
   line-height: 50px;
-
   font-size: 28px;
   font-weight: 600;
 }
@@ -87,7 +109,7 @@ aside {
   border: 1px solid white;
 }
 
-#kmhInput{
+#kmhInput {
   font-size: 150px;
   font-weight: 900;
   line-height: 170px;
@@ -127,7 +149,7 @@ td {
   color: green;
 }
 #ecoHaulingInput {
-  color: red
+  color: red;
 }
 
 #nameBox {
@@ -143,6 +165,7 @@ td {
 
 #truckImageFlat,
 #truckImageDecline,
-#truckImageIncline {
-	display: none;
+#truckImageIncline,
+#truckImageFlatHaul {
+  display: none;
 }
