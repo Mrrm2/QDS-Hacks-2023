@@ -308,9 +308,10 @@ window.addEventListener('load', function () {
 		constructor(image, speedModifier) {
 			this.x = 0;
 			this.y = 0;
-			this.width = canvas.width;
-			this.height = canvas.height;
+			this.width = 850;
+			this.height = 650;
 			this.x2 = this.width;
+			this.image = image;
 			this.speedModifier = speedModifier;
 			this.speed = truckSpeed * this.speedModifier;
 		}
@@ -333,11 +334,11 @@ window.addEventListener('load', function () {
 
 	console.log(backgroundLayer1);
 	const layer1 = new Layer(backgroundLayer1, 0);
-	const layer2 = new Layer(backgroundLayer2, 0.2);
-	const layer3 = new Layer(backgroundLayer3, 0.4);
-	const layer4 = new Layer(backgroundLayer4, 0.6);
-	const layer5 = new Layer(backgroundLayer5, 0.8);
-	const layer6 = new Layer(backgroundLayer6, 1);
+	const layer2 = new Layer(backgroundLayer2, 0.3);
+	const layer3 = new Layer(backgroundLayer3, 0.5);
+	const layer4 = new Layer(backgroundLayer4, 0.1);
+	const layer5 = new Layer(backgroundLayer5, 0.3);
+	const layer6 = new Layer(backgroundLayer6, 1.5);
 
 	const gameObjects = [layer1, layer2, layer3, layer4, layer5, layer6];
 

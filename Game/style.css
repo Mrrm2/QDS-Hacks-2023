@@ -1,13 +1,88 @@
+* {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
 body {
 	background: black;
 }
 
+main {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  border: 1px solid white;
+
+  padding: 20px;
+  width: 1000px;
+  height: 720px;
+}
+
+
+
+section {
+  float: left;
+  width: 68%;
+  height: 700px;
+}
+
+#fp {
+  width: 100%;
+  height: 50px;
+
+  background-color: white;
+}
+
 #canvas1 {
-	position: absolute;
-	bottom: 45%;
-	left: 35%;
-	transform: translate(-50%, 50%);
-	border: 1px solid white;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 20px;
+}
+
+
+
+aside {
+  width: 30%;
+  float: right;
+}
+
+#distanceBox {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 20px;
+
+  background-color: red;
+}
+
+#kmhBox {
+  width: 100%;
+  height: 240px;
+  margin-bottom: 20px;
+
+  background-color: green;
+}
+
+#ecoBox {
+  width: 100%;
+  height: 170px;
+  margin-bottom: 20px;
+
+  background-color: blue;
+}
+
+#nameBox {
+  width: 100%;
+  /* height: 180px; */
+  margin-bottom: 20px;
+
+  /* border: 1px solid white; */
+}
+
+#name {
+  padding: 0px 10px 0px 10px;
+  font-size: 48px;
+  font-weight: 900;
+  color: white;
 }
 
 #truckImageFlat,
