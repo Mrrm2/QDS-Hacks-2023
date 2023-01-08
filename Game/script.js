@@ -122,12 +122,40 @@ window.addEventListener('load', function () {
 			}
 			playerY = slope * x + intercept + offset;
 
-			console.log(this.y);
 			this.y = playerY;
 			context.beginPath();
 			context.setLineDash([]);
-			context.arc(this.x_relative, this.y, 5, 0, 2 * Math.PI);
-			context.fillStyle = 'red';
+			// context.arc(this.x_relative, this.y, 5, 0, 2 * Math.PI);
+			// context.fillStyle = 'red';
+
+			if (currTerrain.terrain === 'decline') {
+				this.image = document.getElementById('truckImageDecline');
+				context.drawImage(
+					this.image,
+					this.x_relative - 27,
+					this.y - 53,
+					70,
+					70
+				);
+			} else if (currTerrain.terrain === 'flat') {
+				this.image = document.getElementById('truckImageFlat');
+				context.drawImage(
+					this.image,
+					this.x_relative - 40,
+					this.y - 53,
+					70,
+					70
+				);
+			} else if (currTerrain.terrain === 'incline') {
+				this.image = document.getElementById('truckImageIncline');
+				context.drawImage(
+					this.image,
+					this.x_relative - 42,
+					this.y - 53,
+					70,
+					70
+				);
+			}
 			context.fill();
 		}
 	}

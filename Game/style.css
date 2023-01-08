@@ -1,15 +1,17 @@
 body {
-  background: black;
+	background: black;
 }
 
 #canvas1 {
-  position: absolute;
-  top: 50%;
-  left: 38%;
-  transform: translate(-50%, -50%);
-  border: 1px solid white;
+	position: absolute;
+	top: 50%;
+	left: 38%;
+	transform: translate(-50%, -50%);
+	border: 1px solid white;
 }
 
-#truckImage {
-  display: none;
+#truckImageFlat,
+#truckImageDecline,
+#truckImageIncline {
+	display: none;
 }
