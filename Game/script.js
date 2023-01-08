@@ -56,6 +56,8 @@ window.addEventListener("load", function () {
   let segment = Math.floor(distanceTravelled / 300);
   let currTerrain = path[segment];
   let timer = 0;
+  let timeElapsed = 0;
+  let fuelConsumed = 0;
   // console.log("segment", segment);
 
   class InputHandler {
@@ -172,9 +174,24 @@ window.addEventListener("load", function () {
       this.y = 100;
       this.speed = 0;
       this.counter = 0;
+      this.startTime = 0;
+      this.start = false;
+
+      this.fuelMultiplier = 1;
       // update max_speed based to make it more realistic (max speed of the truck in data was 60km/h for a 6km course)
       // this.max_speed = 3;
     }
+    fuel() {
+      let fuelRate = 202 / 960;
+      if (currTerrain.terrain === "flat") {
+        fuelConsumed += timeElapsed * 1 * fuelRate * this.fuelMultiplier;
+      } else if (currTerrain.terrain === "decline") {
+        fuelConsumed += timeElapsed * 0.25 * fuelRate * this.fuelMultiplier;
+      } else if (currTerrain.terrain === "incline") {
+        fuelConsumed += timeElapsed * 2.5 * fuelRate * this.fuelMultiplier;
+      }
+    }
+
     acceleration(input) {
       let map = {
         accel: currTerrain.accelerationRate,
@@ -185,6 +202,7 @@ window.addEventListener("load", function () {
 
       // if you are able to accelerate
       if (input === true) {
+        this.fuelMultiplier = 10;
         // console.log("true");
         // determine the acceleration factor using the terrain
         if (this.speed + map.accel > map.maxSpeed) {
@@ -193,10 +211,13 @@ window.addEventListener("load", function () {
           this.speed = Math.min(this.speed + map.accel, map.maxSpeed);
         }
       } else if (input === false) {
+        this.fuelMultiplier = 0.1;
         this.speed = Math.max(0, this.speed + map.decel);
         // this.speed = 0
         // console.log(this.speed);
       }
+
+      // console.log(fuelConsumed)
     }
 
     draw(context) {
@@ -240,17 +261,12 @@ window.addEventListener("load", function () {
     }
 
     update(input) {
-      this.x -= this.speed;
-      this.counter++;
-      //for background
-      truckSpeed = this.speed;
-
-      let km = Math.trunc(truckSpeed * 12.5);
-
-      if (this.counter === 6) {
-        document.getElementById("kmhInput").innerHTML = km;
-        this.counter = 0;
+      if (this.startTime !== 0 && this.counter === 0) {
+        this.startTime = new Date();
       }
+      this.x -= this.speed;
+      // console.log(this.startTime)
+      //for background
 
       let distanceLeft = Math.trunc(2900 - distanceTravelled);
       if (distanceLeft === 0)
@@ -264,6 +280,10 @@ window.addEventListener("load", function () {
       // console.log(segment);
       currTerrain = path[segment];
       if (input.keys.indexOf("ArrowRight") > -1) {
+        if (this.start == false) {
+          this.startTime = new Date();
+        }
+        this.start = true;
         this.acceleration(true);
         // this.speed = 2;
       } else {
@@ -271,6 +291,22 @@ window.addEventListener("load", function () {
         // this.speed = 0;
       }
       // console.log(this.y);
+      if (this.start == true) {
+        this.counter++;
+      }
+
+      truckSpeed = this.speed;
+      let km = Math.trunc(truckSpeed * 12.5);
+      if (this.counter === 6 && this.start == true) {
+        document.getElementById("kmhInput").innerHTML = km;
+        let currTime = new Date();
+        timeElapsed = parseFloat(currTime - this.startTime);
+        timeElapsed /= 1000;
+        timeElapsed = timeElapsed;
+        this.fuel();
+        console.log(fuelConsumed);
+        this.counter = 0;
+      }
     }
   }
 
