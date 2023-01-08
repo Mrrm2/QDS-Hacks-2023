@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Teck Truck Simulator</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teck Truck Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <main>
       <section>
         <div id="fpBox">
           <div id="fp">FP:</div>
-          <div id="fpInput"></div>
+          <div id="fpInput">
+            <div id="fpBar"></div>
+            <div id="fpBarLine"></div>
+          </div>
         </div>
-        <canvas id="canvas1"></canvas>
-      </section>  
-      
+        <div id="canvasContainer">
+          <canvas id="canvas1"></canvas>
+          <div id="status">
+            truk:
+            <span id="statusMessage">empty</span>
+          </div>
+        </div>
+      </section>
+
       <aside>
         <div id="distanceBox">
-          <div id="distance"> <span id="distanceInput">2900</span>m to go!</div>
+          <div id="distance">
+            <span id="distanceInput">2900</span>m to dump!
+          </div>
         </div>
         <div id="kmhBox">
           <div id="kmhInput">36</div>
@@ -44,9 +55,10 @@
       </aside>
     </main>
 
-		<img id="truckImageFlat" src="truckFlat.png" />
-		<img id="truckImageDecline" src="truckDecline.png" />
-		<img id="truckImageIncline" src="truckIncline.png" />
-		<script src="script.js"></script>
-	</body>
+    <img id="truckImageFlat" src="truckFlat.png" />
+    <img id="truckImageDecline" src="truckDecline.png" />
+    <img id="truckImageIncline" src="truckIncline.png" />
+    <img id="truckImageFlatHaul" src="truckFlatHaul.png" />
+    <script src="script.js"></script>
+  </body>
 </html>
