@@ -6,6 +6,10 @@ window.addEventListener("load", function () {
   canvas.height = 650;
   let truckSpeed = 0;
 
+  const gameEnd = () => {
+    console.log("gameEnd")
+  };
+
   const img = new Image();
   img.src = "dirt.png";
 
@@ -47,16 +51,15 @@ window.addEventListener("load", function () {
     FLAT,
     INCLINE,
     FLAT,
+    FLAT,
   ];
 
-  let distanceTravelled = 0; //groundX
-  // console.log("segment", segment)
+  let distanceTravelled = 0;
   let gameLeg = Math.floor(distanceTravelled / 1500);
   let playerY = 100;
   let segment = Math.floor(distanceTravelled / 300);
   let currTerrain = path[segment];
   let timer = 0;
-  // console.log("segment", segment);
 
   class InputHandler {
     constructor() {
@@ -88,6 +91,19 @@ window.addEventListener("load", function () {
       this.speed = 0;
     }
     draw(context) {
+      // console.log(distanceTravelled)
+      if (Math.ceil(distanceTravelled) > 2900) {
+        this.image = document.getElementById("truckImageFlat");
+        context.drawImage(
+          this.image,
+          this.x_relative - 40,
+          this.y - 53,
+          70,
+          70
+        );
+        gameEnd();
+        return;
+      }
       let slope = currTerrain.pathY / currTerrain.pathX;
       let x = distanceTravelled + this.x_relative;
       let intercept = segment * 100;
@@ -129,8 +145,6 @@ window.addEventListener("load", function () {
       this.y = playerY;
       context.beginPath();
       context.setLineDash([]);
-      // context.arc(this.x_relative, this.y, 5, 0, 2 * Math.PI);
-      // context.fillStyle = 'red';
 
       if (currTerrain.terrain === "decline") {
         this.image = document.getElementById("truckImageDecline");
@@ -172,8 +186,6 @@ window.addEventListener("load", function () {
       this.y = 100;
       this.speed = 0;
       this.counter = 0;
-      // update max_speed based to make it more realistic (max speed of the truck in data was 60km/h for a 6km course)
-      // this.max_speed = 3;
     }
     acceleration(input) {
       let map = {
@@ -181,12 +193,7 @@ window.addEventListener("load", function () {
         decel: currTerrain.decelerationRate,
         maxSpeed: currTerrain.maxSpeed,
       };
-      // console.log(currTerrain.terrain)
-
-      // if you are able to accelerate
       if (input === true) {
-        // console.log("true");
-        // determine the acceleration factor using the terrain
         if (this.speed + map.accel > map.maxSpeed) {
           this.speed -= map.accel;
         } else {
@@ -194,13 +201,10 @@ window.addEventListener("load", function () {
         }
       } else if (input === false) {
         this.speed = Math.max(0, this.speed + map.decel);
-        // this.speed = 0
-        // console.log(this.speed);
       }
     }
 
     draw(context) {
-      // this.x = distanceTravelled;
       context.beginPath();
       context.moveTo(0, this.y);
 
@@ -221,20 +225,14 @@ window.addEventListener("load", function () {
       context.lineTo(this.x + totalPathX + 1000, this.y + totalPathY);
       context.lineTo(this.x + totalPathX + 1000, canvas.height);
       context.lineTo(0, canvas.height);
-
       context.lineWidth = 3;
       context.strokeStyle = "rgb(128, 83, 28)";
-      // context.strokeStyle = 'rgb(57, 125, 15)';
-      // context.setLineDash([]);
       context.stroke();
       context.closePath();
       context.save();
-
       context.transform(1, 0, 0, 1, this.x, 0);
       const pattern = context.createPattern(img, "repeat");
       context.fillStyle = pattern;
-
-      // context.fillStyle = "rgb(83, 38, 15)";
       context.fill();
       context.restore();
     }
@@ -242,7 +240,6 @@ window.addEventListener("load", function () {
     update(input) {
       this.x -= this.speed;
       this.counter++;
-      //for background
       truckSpeed = this.speed;
 
       let km = Math.trunc(truckSpeed * 12.5);
@@ -253,28 +250,37 @@ window.addEventListener("load", function () {
       }
 
       let distanceLeft = Math.trunc(2900 - distanceTravelled);
-      if (distanceLeft === 0)
+      if (distanceLeft <= 1450)
+        document.getElementById("statusMessage").innerHTML = "hauling";
+
+      if (distanceLeft <= 0) {
         document.getElementById("distance").innerHTML = "DUMP COMPLETE!";
-      if (distanceLeft % 2 === 0)
+        document.getElementById("statusMessage").innerHTML = "dumped";
+      }
+
+      if (distanceLeft % 2 === 0 && distanceLeft !== null) {
         document.getElementById("distanceInput").innerHTML = distanceLeft;
+      }
 
       distanceTravelled += this.speed;
 
+      const fpBar = document.getElementById("fpBar");
+
+      fpBar.style.width = distanceTravelled / 50 + "%";
+
+      if (Number(fpBar.style.width.slice(0, -1)) > 20) {
+        fpBar.style.backgroundColor = "red";
+      }
+
       segment = Math.floor((distanceTravelled + 100) / 300);
-      // console.log(segment);
       currTerrain = path[segment];
       if (input.keys.indexOf("ArrowRight") > -1) {
         this.acceleration(true);
-        // this.speed = 2;
       } else {
         this.acceleration(false);
-        // this.speed = 0;
       }
-      // console.log(this.y);
     }
   }
-
-  function displayStatusText() {}
 
   const backgroundLayer1 = new Image();
   backgroundLayer1.src = "sky.png";
@@ -317,7 +323,6 @@ window.addEventListener("load", function () {
     }
   }
 
-  console.log(backgroundLayer1);
   const layer1 = new Layer(backgroundLayer1, 0);
   const layer2 = new Layer(backgroundLayer2, 0.3);
   const layer3 = new Layer(backgroundLayer3, 0.5);
@@ -330,6 +335,7 @@ window.addEventListener("load", function () {
   const input = new InputHandler();
   const ground = new Ground(canvas.width, canvas.height, distanceTravelled);
   const player = new Player(canvas.width, canvas.height, ground.y, ground.x);
+
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     gameObjects.forEach((object) => {
@@ -339,9 +345,6 @@ window.addEventListener("load", function () {
     player.draw(ctx);
     ground.draw(ctx);
     ground.update(input);
-    // timer += 0.016666;
-    // console.log(timer)
-    // drive(input);
     requestAnimationFrame(animate);
   }
   animate();
