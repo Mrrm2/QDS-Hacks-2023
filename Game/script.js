@@ -208,10 +208,18 @@ window.addEventListener('load', function () {
 				totalPathX += currentPathX;
 				totalPathY += currentPathY;
 			}
+			context.lineTo(this.x + totalPathX + 1000, this.y + totalPathY);
+			context.lineTo(this.x + totalPathX + 1000, canvas.height);
+			context.lineTo(0, canvas.height);
 
-			context.strokeStyle = 'white';
-			context.setLineDash([5, 5]);
+			context.lineWidth = 20;
+			// context.strokeStyle = 'rgb(128, 83, 28)';
+			context.strokeStyle = 'rgb(57, 125, 15)';
+			context.setLineDash([]);
 			context.stroke();
+			context.closePath();
+			context.fillStyle = 'rgb(187, 132, 65)';
+			context.fill();
 		}
 
 		update(input) {
