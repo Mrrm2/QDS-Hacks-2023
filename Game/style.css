@@ -62,7 +62,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 300;
   align-items: center;
   height: 100%;

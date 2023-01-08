@@ -79,7 +79,6 @@ window.addEventListener("load", function () {
   let currTerrain = path[segment];
   let timeElapsed = 0;
   let fuelConsumed = 0;
-  // console.log("segment", segment);
 
   class InputHandler {
     constructor() {
@@ -218,8 +217,6 @@ window.addEventListener("load", function () {
       this.image = document.getElementById("goal");
 
       this.fuelMultiplier = 1;
-      // update max_speed based to make it more realistic (max speed of the truck in data was 60km/h for a 6km course)
-      // this.max_speed = 3;
     }
     fuel() {
       let fuelRate = 202 / 960;
@@ -240,8 +237,6 @@ window.addEventListener("load", function () {
       };
       if (input === true) {
         this.fuelMultiplier = 10;
-        // console.log("true");
-        // determine the acceleration factor using the terrain
         if (this.speed + map.accel > map.maxSpeed) {
           this.speed -= map.accel;
         } else {
@@ -251,8 +246,6 @@ window.addEventListener("load", function () {
         this.fuelMultiplier = 0.1;
         this.speed = Math.max(0, this.speed + map.decel);
       }
-
-      // console.log(fuelConsumed)
     }
 
     draw(context) {
@@ -374,13 +367,11 @@ window.addEventListener("load", function () {
       } else {
         this.acceleration(false);
       }
-      // console.log(this.y);
       if (this.start == true) {
         this.counter++;
       }
 
       truckSpeed = this.speed;
-      // let km = Math.trunc(truckSpeed * 12.5);
       if (this.counter === 6 && this.start == true) {
         document.getElementById("kmhInput").innerHTML = km;
         let currTime = new Date();
@@ -388,7 +379,6 @@ window.addEventListener("load", function () {
         timeElapsed /= 1000;
         timeElapsed = timeElapsed;
         this.fuel();
-        console.log(fuelConsumed);
         this.counter = 0;
       }
     }
