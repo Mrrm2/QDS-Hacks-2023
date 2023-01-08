@@ -231,13 +231,6 @@ td {
   line-height: 40px;
 }
 
-/* CHANGE COLOR IN JS */
-#ecoEmptyInput {
-  color: green;
-}
-#ecoHaulingInput {
-  color: red;
-}
 
 #nameBox {
   width: 100%;

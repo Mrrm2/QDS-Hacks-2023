@@ -7,6 +7,16 @@ window.addEventListener("load", function () {
   let truckSpeed = 0;
 
   const gameEnd = () => {
+    let totalSavings = (legOneSavings + legTwoSavings).toFixed(2);
+    if (totalSavings >= 0) {
+      document.getElementById(
+        "scoreboard"
+      ).innerHTML = `you spent $${totalSavings} less on fuel than the average driver!!`;
+    } else {
+      document.getElementById("scoreboard").innerHTML = `you spent $${Math.abs(
+        totalSavings
+      )} more on fuel than the average driver!!`;
+    }
     document.getElementById("scoreboard").style.visibility = "visible";
     document.getElementById("gameEndScreen").style.visibility = "visible";
     document.getElementById("gameEndButtons").style.visibility = "visible";
@@ -57,11 +67,11 @@ window.addEventListener("load", function () {
   ];
 
   let distanceTravelled = 0;
-  let gameLeg = Math.floor(distanceTravelled / 1500);
+  let legOneSavings = 0;
+  let legTwoSavings = 0;
   let playerY = 100;
   let segment = Math.floor(distanceTravelled / 300);
   let currTerrain = path[segment];
-  let timer = 0;
   let timeElapsed = 0;
   let fuelConsumed = 0;
   // console.log("segment", segment);
@@ -161,7 +171,7 @@ window.addEventListener("load", function () {
           70
         );
       } else if (currTerrain.terrain === "flat") {
-        if (segment >= 5){
+        if (segment >= 5) {
           this.image = document.getElementById("truckImageFlatHaul");
         } else {
           this.image = document.getElementById("truckImageFlat");
@@ -197,6 +207,9 @@ window.addEventListener("load", function () {
       this.counter = 0;
       this.startTime = 0;
       this.start = false;
+      this.splitOne = false;
+      this.splitTwo = false;
+      this.fuelFirstSplit = 0;
 
       this.fuelMultiplier = 1;
       // update max_speed based to make it more realistic (max speed of the truck in data was 60km/h for a 6km course)
@@ -267,6 +280,38 @@ window.addEventListener("load", function () {
       context.fillStyle = pattern;
       context.fill();
       context.restore();
+    }
+
+    ecoEmpty() {
+      document.getElementById("ecoEmptyInput").style.visibility = "visible";
+      let averageConsumption = 8;
+      let savings = (averageConsumption - fuelConsumed) * 2.5;
+      legOneSavings = savings;
+      this.fuelFirstSplit = fuelConsumed;
+      if (savings < 0) {
+        document.getElementById("ecoEmptyInput").style.color = "red";
+        savings = "- $" + (Math.round(-savings * 100) / 100).toFixed(2);
+      } else {
+        document.getElementById("ecoEmptyInput").style.color = "green";
+        savings = "+ $" + (Math.round(savings * 100) / 100).toFixed(2);
+      }
+      document.getElementById("ecoEmptyInput").innerHTML = savings;
+    }
+
+    ecoHauling() {
+      document.getElementById("ecoHaulingInput").style.visibility = "visible";
+      let averageConsumption = 25;
+      let consumed = fuelConsumed - this.fuelFirstSplit;
+      let savings = (averageConsumption - consumed) * 2.5;
+      legTwoSavings = savings;
+      if (savings < 0) {
+        document.getElementById("ecoHaulingInput").style.color = "red";
+        savings = "- $" + (Math.round(-savings * 100) / 100).toFixed(2);
+      } else {
+        document.getElementById("ecoHaulingInput").style.color = "green";
+        savings = "+ $" + (Math.round(savings * 100) / 100).toFixed(2);
+      }
+      document.getElementById("ecoHaulingInput").innerHTML = savings;
     }
 
     update(input) {
@@ -403,6 +448,14 @@ window.addEventListener("load", function () {
     ground.draw(ctx);
     ground.update(input);
     requestAnimationFrame(animate);
+    if (ground.splitOne == false && distanceTravelled >= 1400) {
+      ground.splitOne = true;
+      ground.ecoEmpty();
+    }
+    if (ground.splitTwo == false && distanceTravelled >= 2890) {
+      ground.splitTwo = true;
+      ground.ecoHauling();
+    }
   }
   animate();
 });

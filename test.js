@@ -39,21 +39,21 @@ function score() {
 // time elapsed based on when player clicks Start and End buttons
 var startTime, endTime;
 
-    function start() {
-        startTime = new Date();
-    }
+function start() {
+    startTime = new Date();
+}
 
-    function end() {
-        endTime = new Date();
-        var timeDiff = endTime - startTime; // this is in milliseconds
-        timeDiff /= 1000; // strip the ms???
+function end() {
+    endTime = new Date();
+    var timeDiff = endTime - startTime; // this is in milliseconds
+    timeDiff /= 1000; // strip the ms???
 
-        // convert to seconds
-        var seconds = Math.round(timeDiff);
-        console.log(seconds + " seconds");
-        
-        // document.getelementByID("asdf").innerHTML = seconds 
-    }
+    // convert to seconds
+    var seconds = Math.round(timeDiff);
+    console.log(seconds + " seconds");
+    
+    // document.getelementByID("asdf").innerHTML = seconds 
+}
 
 
 
