@@ -7,7 +7,9 @@ window.addEventListener("load", function () {
   let truckSpeed = 0;
 
   const gameEnd = () => {
-    console.log("gameEnd");
+    document.getElementById("scoreboard").style.visibility = "visible";
+    document.getElementById("gameEndScreen").style.visibility = "visible";
+    document.getElementById("gameEndButtons").style.visibility = "visible";
   };
 
   const img = new Image();
@@ -94,8 +96,7 @@ window.addEventListener("load", function () {
       this.speed = 0;
     }
     draw(context) {
-      // console.log(distanceTravelled)
-      if (Math.ceil(distanceTravelled) > 2900) {
+      if (Math.ceil(distanceTravelled) >= 2900) {
         this.image = document.getElementById("truckImageFlat");
         context.drawImage(
           this.image,
@@ -107,6 +108,7 @@ window.addEventListener("load", function () {
         gameEnd();
         return;
       }
+
       let slope = currTerrain.pathY / currTerrain.pathX;
       let x = distanceTravelled + this.x_relative;
       let intercept = segment * 100;
@@ -159,7 +161,7 @@ window.addEventListener("load", function () {
           70
         );
       } else if (currTerrain.terrain === "flat") {
-        if (segment >= 5) {
+        if (segment >= 5){
           this.image = document.getElementById("truckImageFlatHaul");
         } else {
           this.image = document.getElementById("truckImageFlat");

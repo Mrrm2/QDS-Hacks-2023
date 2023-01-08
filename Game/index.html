@@ -6,9 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teck Truck Simulator</title>
     <link rel="stylesheet" href="style.css" />
+    <script>
+      const refresh = () => {
+        window.location.reload();
+      };
+
+      const leaderboard = () => {
+        document.getElementById("gameEndStat").style.display = "none";
+        document.getElementById("leaderboard").style.display = "contents";
+      };
+    </script>
   </head>
   <body>
     <main>
+      <div id="scoreboard">
+        <div id="gameEndScreen">
+          <div id="gameEndStat">you saved 0$!</div>
+          <div id="gameEndButtons">
+            <button onClick="leaderboard()" class="gameEndButton">
+              leaderboard
+            </button>
+            <button onClick="refresh()" class="gameEndButton">try again</button>
+          </div>
+          <div id="leaderboard">
+            <div id="leaderboardDisplay">
+              <div id="names">
+                <div>joseph Chun</div>
+                <div>kevin Liang</div>
+                <div>kira Yoon</div>
+                <div>natalie Yu</div>
+              </div>
+              <div id="scores">
+                <div>0</div>
+                <div>0</div>
+                <div>0</div>
+                <div>0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <section>
         <div id="fpBox">
           <div id="fp">FP:</div>

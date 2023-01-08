@@ -19,6 +19,78 @@ main {
   height: 720px;
 }
 
+#scoreboard {
+  visibility: hidden;
+  position: absolute;
+  z-index: 2000;
+  top: 88px;
+  background-color: black;
+  opacity: 80%;
+  width: 682px;
+  height: 652px;
+}
+/* #gameEndMessage {
+  padding-top: 10px;
+} */
+#gameEndStat {
+  visibility: none;
+  padding-bottom: 80px;
+  font-size: 90px;
+}
+
+#leaderboard {
+  display: none;
+}
+
+#leaderboardDisplay {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  padding-bottom: 140px;
+}
+
+/* #names {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+} */
+
+#gameEndScreen {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 60px;
+  font-weight: 300;
+  align-items: center;
+  height: 100%;
+}
+
+#gameEndButtons {
+  visibility: none;
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px;
+  padding-bottom: 120px;
+  width: 100%;
+  bottom: -70px;
+}
+
+.gameEndButton {
+  background: none;
+  font-size: 30px;
+  font-weight: 300;
+  border-width: 1px;
+  border-color: white;
+  padding-top: 13px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  /* text-align: center; */
+}
+
 section {
   float: left;
   width: 68%;
