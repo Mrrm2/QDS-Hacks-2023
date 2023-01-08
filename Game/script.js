@@ -274,7 +274,6 @@ window.addEventListener("load", function () {
         this.startTime = new Date();
       }
       this.x -= this.speed;
-      this.counter++;
       truckSpeed = this.speed;
 
       let km = Math.trunc(truckSpeed * 12.5);
@@ -300,10 +299,12 @@ window.addEventListener("load", function () {
       distanceTravelled += this.speed;
 
       const fpBar = document.getElementById("fpBar");
-
-      fpBar.style.width = distanceTravelled / 50 + "%";
-
-      if (Number(fpBar.style.width.slice(0, -1)) > 20) {
+      if (Number(fuelConsumed * 2) >= 99) {
+        fpBar.style.width = 100 + "%";
+      } else {
+        fpBar.style.width = fuelConsumed * 2 + "%";
+      }
+      if (Number(fpBar.style.width.slice(0, -1)) > 67) {
         fpBar.style.backgroundColor = "red";
       }
 
