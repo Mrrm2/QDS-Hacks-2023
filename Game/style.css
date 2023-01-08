@@ -71,7 +71,7 @@ aside {
 #distance {
   padding: 0px 10px 0px 10px;
   line-height: 50px;
-
+  text-align: center;
   font-size: 28px;
   font-weight: 600;
 }
@@ -86,7 +86,7 @@ aside {
 }
 
 #kmhInput{
-  font-size: 130px;
+  font-size: 150px;
   font-weight: 900;
   line-height: 170px;
 }
