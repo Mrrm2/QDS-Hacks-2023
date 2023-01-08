@@ -256,3 +256,15 @@ td {
 #truckImageFlatHaul {
   display: none;
 }
+
+input {
+  color: black;
+}
+
+#startgameID {
+  color: black;
+}
+
+.playerStartScreen {
+  text-align: center;
+}
