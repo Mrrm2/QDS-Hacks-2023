@@ -25,6 +25,11 @@ section {
   height: 700px;
 }
 
+aside {
+  width: 30%;
+  float: right;
+}
+
 #fpBox {
   position: relative;
   width: 100%;
@@ -38,6 +43,8 @@ section {
   transform: translate(-50%,-50%);
   width: 90%;
   height: 30px;
+
+  /* CHANGE COLOUR IN JS */
   background-color: green;
 }
 
@@ -54,11 +61,6 @@ section {
   border: 1px solid white;
   position: absolute;
   bottom: 20px;
-}
-
-aside {
-  width: 30%;
-  float: right;
 }
 
 #distanceBox {
@@ -104,16 +106,28 @@ aside {
 }
 
 table {
-  width: 80%;
+  width: 100%;
   text-align: center;
-
-  border: 1px solid white;
 }
 
 th {
   font-size: 48px;
   font-weight: 800;
+  line-height: 65px;
+}
+
+td {
+  font-size: 28px;
+  font-weight: 400;
   line-height: 40px;
+}
+
+/* CHANGE COLOR IN JS */
+#ecoEmptyInput {
+  color: green;
+}
+#ecoHaulingInput {
+  color: red
 }
 
 #nameBox {
@@ -122,7 +136,7 @@ th {
 }
 
 #name {
-  padding: 0px 10px 0px 10px;
+  padding: 0px 10px;
   font-size: 48px;
   font-weight: 900;
 }
