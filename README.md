@@ -5,6 +5,7 @@ A truck driving simulator to make sure u dont go pedal to the metal and waste ga
 ## Gameplay
 
 Carefully manage your truck's FP (fuel points) by accelerating mindfully to beat the average real truck driver's score!
+
 Drive down the simulated mine as a truck driver, pick up your payload, and make it back up the mine without your FP bar going red.
 
 ## Example run - Costs saved!
