@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
   };
 
   const img = new Image();
-  img.src = "dirt.png";
+  img.src = "rock.png";
 
   const DECLINE = {
     terrain: "decline",
@@ -215,6 +215,7 @@ window.addEventListener("load", function () {
       this.splitOne = false;
       this.splitTwo = false;
       this.fuelFirstSplit = 0;
+      this.image = document.getElementById("goal");
 
       this.fuelMultiplier = 1;
       // update max_speed based to make it more realistic (max speed of the truck in data was 60km/h for a 6km course)
@@ -272,6 +273,8 @@ window.addEventListener("load", function () {
         totalPathY += currentPathY;
       }
 
+      const dirtpile = document.getElementById("dirtpile");
+
       context.lineTo(this.x + totalPathX + 1000, this.y + totalPathY);
       context.lineTo(this.x + totalPathX + 1000, canvas.height);
       context.lineTo(0, canvas.height);
@@ -281,6 +284,8 @@ window.addEventListener("load", function () {
       context.closePath();
       context.save();
       context.transform(1, 0, 0, 1, this.x, 0);
+      context.drawImage(this.image, 3000, 34);
+      context.drawImage(dirtpile, 1450, 540)
       const pattern = context.createPattern(img, "repeat");
       context.fillStyle = pattern;
       context.fill();

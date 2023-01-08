@@ -128,11 +128,13 @@ aside {
   font-weight: 900;
   /* border : 1px solid black; */
   opacity: 0.8;
-  background: repeating-linear-gradient( 45deg, 
-  #f96060, 
-  #f96060 2px,
-  #f8a4a4 2px, 
-  #f8a4a4 5px );
+  background: repeating-linear-gradient(
+    45deg,
+    #f96060,
+    #f96060 2px,
+    #f8a4a4 2px,
+    #f8a4a4 5px
+  );
   /* background-color: rgb(97, 235, 120); */
   /* border: 1px solid black; */
   width: 29%;
@@ -247,7 +249,9 @@ td {
 #truckImageFlat,
 #truckImageDecline,
 #truckImageIncline,
-#truckImageFlatHaul {
+#truckImageFlatHaul,
+#goal,
+#dirtpile {
   display: none;
 }
 
