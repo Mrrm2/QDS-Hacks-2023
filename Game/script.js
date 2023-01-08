@@ -7,17 +7,22 @@ window.addEventListener("load", function () {
   let truckSpeed = 0;
 
   const gameEnd = () => {
-    let totalSavings = (legOneSavings + legTwoSavings).toFixed(2);
+    let totalSavings = (
+      Math.round((legOneSavings + legTwoSavings) * 100) / 100
+    ).toFixed(2);
     if (totalSavings >= 0) {
       document.getElementById(
-        "scoreboard"
-      ).innerHTML = `you spent $${totalSavings} less on fuel than the average driver!!`;
+        "gameEndStat"
+      ).innerHTML = `your fuel usage was <span style="color:green"> $${totalSavings} BELOW </span> average!!!`;
     } else {
-      document.getElementById("scoreboard").innerHTML = `you spent $${Math.abs(
+      document.getElementById(
+        "gameEndStat"
+      ).innerHTML = `your fuel usage was <span style="color:red"> $${Math.abs(
         totalSavings
-      )} more on fuel than the average driver!!`;
+      )} ABOVE </span> average :'(`;
     }
     document.getElementById("scoreboard").style.visibility = "visible";
+    document.getElementById("leaderboard").style.visibility = "visible";
     document.getElementById("gameEndScreen").style.visibility = "visible";
     document.getElementById("gameEndButtons").style.visibility = "visible";
   };
@@ -285,7 +290,7 @@ window.addEventListener("load", function () {
     ecoEmpty() {
       document.getElementById("ecoEmptyInput").style.visibility = "visible";
       let averageConsumption = 8;
-      let savings = (averageConsumption - fuelConsumed) * 2.5;
+      let savings = (averageConsumption - fuelConsumed) * 2.5 * 6;
       legOneSavings = savings;
       this.fuelFirstSplit = fuelConsumed;
       if (savings < 0) {
@@ -302,7 +307,7 @@ window.addEventListener("load", function () {
       document.getElementById("ecoHaulingInput").style.visibility = "visible";
       let averageConsumption = 25;
       let consumed = fuelConsumed - this.fuelFirstSplit;
-      let savings = (averageConsumption - consumed) * 2.5;
+      let savings = (averageConsumption - consumed) * 2.5 * 6;
       legTwoSavings = savings;
       if (savings < 0) {
         document.getElementById("ecoHaulingInput").style.color = "red";

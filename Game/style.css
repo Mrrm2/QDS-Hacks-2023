@@ -34,8 +34,9 @@ main {
 } */
 #gameEndStat {
   visibility: none;
-  padding-bottom: 80px;
-  font-size: 90px;
+  padding: 0px 40px 80px 40px;
+  font-size: 50px;
+  text-align: center;
 }
 
 #leaderboard {
