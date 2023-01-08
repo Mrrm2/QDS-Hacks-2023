@@ -115,15 +115,30 @@ aside {
 
 #fpBar {
   background-color: green;
+  opacity: 80%;
   width: 75%;
   height: 100%;
 }
 
 #fpBarLine {
   position: absolute;
-  border-right: 3px solid black;
-  width: 60%;
+  /* position: relative; z-index: 4000;  */
+  color: BLACK;
+  font-weight: 900;
+  /* border : 1px solid black; */
+  opacity: 0.8;
+  background: repeating-linear-gradient( 45deg, 
+  #f96060, 
+  #f96060 2px,
+  #f8a4a4 2px, 
+  #f8a4a4 5px );
+  /* background-color: rgb(97, 235, 120); */
+  /* border: 1px solid black; */
+  width: 29%;
+  margin-left: 401px;
+  text-align: center;
   height: 27.5px;
+  line-height: 26.5px;
   bottom: 11px;
 }
 
