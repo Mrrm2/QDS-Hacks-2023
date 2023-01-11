@@ -1,4 +1,4 @@
-# QDS-Hacks-2023
+# QDS-Hacks-2023 Third Place Winner
 
 A truck driving simulator to make sure u dont go pedal to the metal and waste gas!
 
